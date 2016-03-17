@@ -1,5 +1,5 @@
 /**
-  * Created by khn3193 on 3/15/16.
+  * Created by Kunal Herkal on 3/15/16.
   */
 trait Suit {
   def identifier : String
@@ -7,6 +7,6 @@ trait Suit {
   def cards : Set[Card]
 
   def cardsForSuit(): Set[Card] = {
-    (0 to 12).map(cost => Card.createCards(this, cost)).toSet
+    (0 to 12).map(rank => Card(this, rank)).toSet
   }
 }

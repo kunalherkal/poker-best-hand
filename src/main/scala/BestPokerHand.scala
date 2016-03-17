@@ -1,19 +1,19 @@
 /**
-  * Created by khn3193 on 3/16/16.
+  * Created by Kunal Herkal on 3/16/16.
   */
-object BestPokerHandResolver {
-  def findBestHand(a : Array[Card]) : String = () match {
-    case fourOfKind if isFourOfAKind(a) => "Four of a Kind"
-    case fullHouse if isFullHouse(a) => "Full House"
-    case flush if isFlush(a) => "Flush"
-    case straight if isStraight(a) => "Straight"
-    case threeOfKind if isThreeOfAKind(a) => "Three Of Kind"
-    case pair if isPair(a) => "Pair"
-    case _ => "High Card"
+object BestPokerHand {
+  def resolve(a : Array[Card]) : String = () match {
+    case fourOfKind if isFourOfAKind(a) => "four-of-a-kind"
+    case fullHouse if isFullHouse(a) => "full-house"
+    case flush if isFlush(a) => "flush"
+    case straight if isStraight(a) => "straight"
+    case threeOfKind if isThreeOfAKind(a) => "three-of-a-kind"
+    case pair if isPair(a) => "pair"
+    case _ => "high-card"
   }
 
   def isFlush(a : Array[Card]) : Boolean = {
-    a.map(card => card.suitName).groupBy(identity).mapValues(_.length).size == 1
+    a.map(card => card.suitName).toSet.size == 1
   }
 
   def isFourOfAKind(a : Array[Card]) : Boolean = {
