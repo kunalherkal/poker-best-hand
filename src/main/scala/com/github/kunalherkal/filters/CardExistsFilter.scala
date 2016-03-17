@@ -11,6 +11,6 @@ object CardExistsFilter extends CardFilter {
   }
 
   def cardExists(cardName : String, deck : Deck) : Unit = {
-    if (deck.allCards().find(c => c.name == cardName).isEmpty) throw new IllegalArgumentException("Card you entered is invalid: " + cardName)
+    if(!deck.cardExists(cardName)) throw new IllegalArgumentException("Card you entered is invalid: " + cardName)
   }
 }

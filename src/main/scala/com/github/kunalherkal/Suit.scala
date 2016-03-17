@@ -6,9 +6,5 @@ package com.github.kunalherkal
 trait Suit {
   def identifier : String
   def name : String
-  def cards : Set[Card]
 
-  def cardsForSuit(): Set[Card] = {
-    (0 to 12).map(rank => Card(this, rank)).toSet
-  }
 }

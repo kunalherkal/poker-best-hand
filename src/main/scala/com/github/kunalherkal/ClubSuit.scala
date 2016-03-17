@@ -6,7 +6,4 @@ package com.github.kunalherkal
 class ClubSuit extends Suit {
   val identifier = "C"
   val name = "Club"
-  val cards = this.cardsForSuit
-
-  override def toString = s"ClubSuit(identifier=$identifier, cards=$cards)"
 }

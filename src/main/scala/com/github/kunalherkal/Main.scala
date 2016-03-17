@@ -10,15 +10,16 @@ object Main extends App {
   val deck = new Deck
 
   def getDeck : Deck = {
+    //avoid null checks
     if (deck != null) deck else new Deck
   }
 
-  def bestHand(a : String, b :String, c : String, d :String, e : String): String = {
-    val hand = Array(a, b, c, d, e)
-    FilterProcessor.validate(hand, getDeck)
-
-    val cards = hand.map(cardName => Deck.getCard(cardName, getDeck))
-    BestPokerHand.resolve(cards)
+  def findBestHand(a : String, b :String, c : String, d :String, e : String): String = {
+    val cardNames = Array(a, b, c, d, e)
+    FilterProcessor.validate(cardNames, new Deck)
+    val cards = cardNames.map(cardName => getDeck.getCard(cardName))
+    val hand = new Hand(cards)
+    hand.resolveBestPokerHand()
   }
 
 }
