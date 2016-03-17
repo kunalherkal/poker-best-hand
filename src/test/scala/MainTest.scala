@@ -28,6 +28,24 @@ class MainTest extends FlatSpec with Matchers {
     assert(bestHand == "straight")
   }
 
+  "best hand" should "not be straight and should be pair" in {
+
+    val bestHand = Main.bestHand("HA", "CA", "D2", "D3", "D4")
+    assert(bestHand == "pair")
+  }
+
+  "best hand" should "not be straight and should be high card" in {
+
+    val bestHand = Main.bestHand("HA", "HK", "HQ", "H2", "C3")
+    assert(bestHand == "high-card")
+  }
+
+  "best hand" should "be straight 2" in {
+
+    val bestHand = Main.bestHand("HA", "DK", "HQ", "HJ", "HT")
+    assert(bestHand == "straight")
+  }
+
   "best hand" should "be three of a kind" in {
 
     val bestHand = Main.bestHand("H5", "D2", "D5", "S7", "C5")
