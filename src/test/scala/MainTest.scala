@@ -1,3 +1,4 @@
+import com.github.kunalherkal.Main
 import org.scalatest.{Matchers, FlatSpec}
 
 /**

@@ -1,3 +1,7 @@
+package com.github.kunalherkal
+
+import com.github.kunalherkal.filters.FilterProcessor
+
 /**
   * Created by Kunal Herkal on 3/15/16.
   */
