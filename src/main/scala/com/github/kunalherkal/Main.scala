@@ -17,7 +17,7 @@ object Main extends App {
   def findBestHand(a : String, b :String, c : String, d :String, e : String): String = {
     val cardNames = Array(a, b, c, d, e)
     FilterProcessor.validate(cardNames, new Deck)
-    val cards = cardNames.map(cardName => getDeck.getCard(cardName))
+    val cards: Array[Card] = cardNames.map(cardName => getDeck.getCard(cardName))
     val hand = new Hand(cards)
     hand.resolveBestPokerHand()
   }

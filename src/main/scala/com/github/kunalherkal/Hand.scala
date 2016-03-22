@@ -5,6 +5,8 @@ package com.github.kunalherkal
   */
 class Hand(val cards : Array[Card]) {
 
+  require(cards.length == 5)
+
   def resolveBestPokerHand() : String = {
     if (isFourOfAKind) return "four-of-a-kind"
     if (isFullHouse)  return "full-house"
@@ -30,8 +32,8 @@ class Hand(val cards : Array[Card]) {
   def isStraight : Boolean = {
     val ranks = cards.map(card => card.rank)
     ranks match {
-      case sequence if isInSequence(ranks) => true
-      case hasAce if ranks.contains(12) => isInSequenceWithAce(ranks)
+      case sequence if inSequence(ranks) => true
+      case hasAce if ranks.contains(12) => inSequenceWithAce(ranks)
       case _ => false
     }
   }
@@ -44,20 +46,29 @@ class Hand(val cards : Array[Card]) {
     rankRepetitions(cards).contains(2)
   }
 
-  private def isInSequenceWithAce(list : Array[Int]) : Boolean = {
+  private def inSequenceWithAce(list : Array[Int]) : Boolean = {
     val cardsExceptAce = list.filter(a => a != 12)
-    cardsExceptAce.length == 4 && cardsExceptAce.contains(0) && isInSequence(cardsExceptAce)
+    cardsExceptAce.length == 4 && cardsExceptAce.contains(0) && inSequence(cardsExceptAce)
   }
 
-  private def isInSequence(ranks : Array[Int]) : Boolean = {
+  private def inSequence(ranks : Array[Int]) : Boolean = {
 
-    def isInInSequence(list : List[Int]) : Boolean = list match {
+    def isInSequence(list : List[Int]) : Boolean = list match {
       case a :: Nil => true
-      case head :: tail => ((head + 1) == tail.head) && isInInSequence(tail)
+      case head :: tail => ((head + 1) == tail.head) && isInSequence(tail)
       case Nil => throw new IllegalArgumentException
     }
 
-    isInInSequence(ranks.toList.sorted)
+    def isInSequenceWithFold(list : List[Int]) : Boolean = {
+      val result : (Boolean, Int) = list.foldLeft((true, -1)) { (result, e) =>
+        if(result._2 == -1) true -> e
+        else (result._1 && ((result._2 + 1) == e)) -> e
+      }
+
+      result._1
+    }
+
+    isInSequence(ranks.toList.sorted)
   }
 
   private def rankRepetitions(a : Array[Card]) : Seq[Int] = {
